@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        input, textarea, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .hrom {
+            color: #000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Panel</h2>
+        <a class="hrom" href="C:\Users\Gaming\Downloads\programming\simplaza-clone\index.html">Back Home</a>
+        <form id="addPageForm">
+            <input type="text" id="pageTitle" placeholder="Page Title" required />
+            <textarea id="pageContent" placeholder="Page Content (HTML allowed)" rows="5"></textarea>
+            <input type="text" id="version" placeholder="Version (e.g., 1.3.3)" />
+            <input type="date" id="releaseDate" placeholder="Release Date" />
+            <textarea id="changelog" placeholder="Changelog (one item per line)" rows="3"></textarea>
+            <textarea id="description" placeholder="Description" rows="5"></textarea>
+            <input type="url" id="downloadLink" placeholder="Download Link" />
+            <button type="submit">Add Page</button>
+        </form>
+    </div>
+    </div>
+    <script>
+document.getElementById("addPageForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const title = document.getElementById("pageTitle").value;
+    const content = document.getElementById("pageContent").value;
+    const version = document.getElementById("version").value;
+    const release_date = document.getElementById("releaseDate").value;
+    const changelog = document.getElementById("changelog").value;
+    const description = document.getElementById("description").value;
+    const download_link = document.getElementById("downloadLink").value;
+
+    const response = await fetch("add_page.php", {
+        method: "POST",
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": "Bearer securepassword"
+        },
+        body: JSON.stringify({ 
+            title, content, version, release_date, changelog, description, download_link 
+        })
+    });
+
+    if (response.ok) {
+        alert("Page added successfully!");
+    } else {
+        alert("Failed to add page.");
+    }
+});
+    </script>
+
+
+</body>
+</html>

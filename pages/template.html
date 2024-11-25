@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a class="whitenorm" href="../index.html">Home</a></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail">
+            <h1>{{title}}</h1>
+            <img src="../assets/images/default.jpg" alt="Default Image">
+            <p>Version {{version}} - Released {{release_date}}</p>
+            <div class="alert">⚠️ Important: Customize this alert message!</div>
+
+            <h2>Changelog</h2>
+            <ul>
+                <li>{{changelog}}</li>
+            </ul>
+
+            <h2>Description</h2>
+            <p>{{description}}</p>
+
+            <h2>Download</h2>
+            <ul>
+                <li><a href="{{download_link}}" target="_blank">Download</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 All Rights Reserved</p>
+    </footer>
+</body>
+</html>
