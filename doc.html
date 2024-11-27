@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öffentliches Notizboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Öffentliches Notizboard</h2>
+    <textarea id="textBox" placeholder="Hier deinen Text eingeben..."></textarea>
+    <button onclick="saveText()">Speichern</button>
+</div>
+
+<script>
+    // Laden des gespeicherten Textes beim Start
+    window.onload = async function() {
+        try {
+            const response = await fetch('https://your-server-endpoint/get-text');
+            const data = await response.json();
+            document.getElementById('textBox').value = data.text || '';
+        } catch (error) {
+            console.error('Fehler beim Laden des Textes:', error);
+        }
+    };
+
+    // Speichern des Textes
+    async function saveText() {
+        const text = document.getElementById('textBox').value;
+        try {
+            const response = await fetch('https://your-server-endpoint/save-text', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: text }),
+            });
+            if (response.ok) {
+                alert('Text erfolgreich gespeichert!');
+            } else {
+                alert('Fehler beim Speichern.');
+            }
+        } catch (error) {
+            console.error('Speicherfehler:', error);
+            alert('Fehler beim Speichern.');
+        }
+    }
+</script>
+
+</body>
+</html>
